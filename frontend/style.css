@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f7fb;
+  color: #1e293b;
+}
+
+header {
+  background: #172554;
+  color: white;
+  padding: 24px;
+}
+
+main {
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #00000010;
+}
+
+.amount {
+  color: #2563eb;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+@media (max-width: 600px) {
+  main {
+    margin: 12px auto;
+    padding: 12px;
+  }
+}
