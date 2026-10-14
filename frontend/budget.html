@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Budget</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Monthly Budget Management</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+    </nav>
+
+    <h2>Set Your Monthly Budget</h2>
+
+    <form id="budgetForm" class="card">
+      <label for="limit">Monthly spending limit (₹)</label>
+      <input id="limit" type="number" min="1" step="0.01"
+             placeholder="e.g. 12000" required>
+      <button type="submit">Set Budget</button>
+    </form>
+
+    <section class="card">
+      <h2>Budget Summary</h2>
+      <p>Budget limit: <strong id="budgetLimit">₹0.00</strong></p>
+      <p>Sample spending: <strong id="spent">₹8500.00</strong></p>
+      <p>Remaining: <strong id="remaining">₹0.00</strong></p>
+      <progress id="usage" value="0" max="100"></progress>
+      <p id="message">Set a budget to view your progress.</p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("budgetForm");
+    const limitInput = document.getElementById("limit");
+    const spent = 8500; // Demonstration data only
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const limit = Number(limitInput.value);
+
+      if (!Number.isFinite(limit) || limit <= 0) {
+        alert("Enter a valid budget greater than zero.");
+        return;
+      }
+
+      const remaining = limit - spent;
+      const percentage = (spent / limit) * 100;
+
+      document.getElementById("budgetLimit").textContent =
+        "₹" + limit.toFixed(2);
+      document.getElementById("spent").textContent =
+        "₹" + spent.toFixed(2);
+      document.getElementById("remaining").textContent =
+        "₹" + remaining.toFixed(2);
+      document.getElementById("usage").value =
+        Math.min(percentage, 100);
+
+      const message = document.getElementById("message");
+
+      if (remaining < 0) {
+        message.textContent = "Warning: Your budget has been exceeded!";
+      } else if (percentage >= 80) {
+        message.textContent = "Warning: You are close to your budget limit.";
+      } else {
+        message.textContent = "You are within your budget.";
+      }
+    });
+  </script>
+</body>
+</html>
