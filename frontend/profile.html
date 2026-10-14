@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Your account and preferences</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+      <a href="analytics.html">Analytics</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+
+    <h2>My Profile</h2>
+
+    <form id="profileForm" class="card">
+      <label for="name">Full name</label>
+      <input id="name" type="text" placeholder="Enter your name" required>
+
+      <label for="email">Email address</label>
+      <input id="email" type="email" placeholder="you@example.com" required>
+
+      <label for="currency">Preferred currency</label>
+      <select id="currency">
+        <option value="INR">Indian Rupee (₹)</option>
+        <option value="USD">US Dollar ($)</option>
+      </select>
+
+      <button type="submit">Save Profile</button>
+      <p id="message" role="status"></p>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById("profileForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const currency = document.getElementById("currency").value;
+
+      if (!name || !email) {
+        message.textContent = "Please complete all required fields.";
+        return;
+      }
+
+      message.textContent =
+        "Profile details validated. Backend saving will be added during integration.";
+      console.log({ name, email, currency });
+    });
+  </script>
+</body>
+</html>
