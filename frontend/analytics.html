@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Analytics</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Understand your finances</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+      <a href="analytics.html">Analytics</a>
+    </nav>
+
+    <h2>Financial Analytics</h2>
+
+    <section class="cards">
+      <article class="card">
+        <h3>Monthly Income</h3>
+        <p class="amount">₹25,000</p>
+      </article>
+      <article class="card">
+        <h3>Monthly Expenses</h3>
+        <p class="amount">₹8,500</p>
+      </article>
+      <article class="card">
+        <h3>Savings Rate</h3>
+        <p class="amount">66%</p>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Income vs Expenses</h2>
+      <div style="margin-bottom:16px">
+        Income: ₹25,000
+        <progress value="25000" max="25000"></progress>
+      </div>
+      <div>
+        Expenses: ₹8,500
+        <progress value="8500" max="25000"></progress>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Expense Categories</h2>
+      <p>Food — ₹3,000</p>
+      <progress value="3000" max="8500"></progress>
+      <p>Travel — ₹2,000</p>
+      <progress value="2000" max="8500"></progress>
+      <p>Education — ₹2,000</p>
+      <progress value="2000" max="8500"></progress>
+      <p>Entertainment — ₹1,500</p>
+      <progress value="1500" max="8500"></progress>
+    </section>
+    <p class="note">Demonstration data only. Live analytics will be connected to the backend later.</p>
+  </main>
+</body>
+</html>
