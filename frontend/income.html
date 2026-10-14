@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Income</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Income Management</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+    </nav>
+
+    <h2>Manage Your Income</h2>
+
+    <form id="incomeForm" class="card">
+      <label for="source">Income source</label>
+      <input id="source" type="text" placeholder="e.g. Salary" required>
+
+      <label for="amount">Amount (₹)</label>
+      <input id="amount" type="number" min="0.01" step="0.01" required>
+
+      <label for="date">Date</label>
+      <input id="date" type="date" required>
+
+      <button type="submit">Add Income</button>
+    </form>
+
+    <h2>Income History</h2>
+    <div id="incomeHistory" class="card">
+      No income added yet.
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("incomeForm");
+    const history = document.getElementById("incomeHistory");
+
+    let incomes = [];
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const source = document.getElementById("source").value.trim();
+      const amount = Number(document.getElementById("amount").value);
+      const date = document.getElementById("date").value;
+
+      if (!source || amount <= 0 || !date) {
+        alert("Please enter valid income details.");
+        return;
+      }
+
+      incomes.push({ source, amount, date });
+      history.innerHTML = "";
+
+      incomes.forEach(function(item) {
+        const row = document.createElement("p");
+        row.textContent =
+          item.source + " — ₹" + item.amount.toFixed(2) +
+          " — " + item.date;
+        history.appendChild(row);
+      });
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
