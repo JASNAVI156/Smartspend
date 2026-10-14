@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Expenses</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Expense Management</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+    </nav>
+
+    <h2>Manage Your Expenses</h2>
+
+    <form id="expenseForm" class="card">
+      <label for="description">Expense description</label>
+      <input id="description" type="text"
+             placeholder="e.g. Groceries" required>
+
+      <label for="category">Category</label>
+      <select id="category" required>
+        <option value="">Select category</option>
+        <option>Food</option>
+        <option>Travel</option>
+        <option>Education</option>
+        <option>Shopping</option>
+        <option>Bills</option>
+        <option>Entertainment</option>
+        <option>Other</option>
+      </select>
+
+      <label for="amount">Amount (₹)</label>
+      <input id="amount" type="number"
+             min="0.01" step="0.01" required>
+
+      <label for="date">Date</label>
+      <input id="date" type="date" required>
+
+      <button type="submit">Add Expense</button>
+    </form>
+
+    <h2>Expense History</h2>
+    <div id="expenseHistory" class="card">
+      No expenses added yet.
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById("expenseForm");
+    const history = document.getElementById("expenseHistory");
+    const expenses = [];
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const description =
+        document.getElementById("description").value.trim();
+      const category = document.getElementById("category").value;
+      const amount = Number(
+        document.getElementById("amount").value
+      );
+      const date = document.getElementById("date").value;
+
+      if (!description || !category ||
+          !Number.isFinite(amount) || amount <= 0 || !date) {
+        alert("Please enter valid expense details.");
+        return;
+      }
+
+      expenses.push({ description, category, amount, date });
+      history.replaceChildren();
+
+      expenses.forEach(function(item) {
+        const row = document.createElement("p");
+        row.textContent =
+          item.description + " | " + item.category +
+          " | ₹" + item.amount.toFixed(2) + " | " + item.date;
+        history.appendChild(row);
+      });
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
