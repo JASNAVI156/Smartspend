@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartSpend | Savings Goals</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>SmartSpend 💰</h1>
+    <p>Plan your savings. Reach your goals.</p>
+  </header>
+
+  <main>
+    <nav class="navigation">
+      <a href="index.html">Dashboard</a>
+      <a href="income.html">Income</a>
+      <a href="expenses.html">Expenses</a>
+      <a href="budget.html">Budget</a>
+      <a href="savings.html">Savings Goals</a>
+    </nav>
+
+    <h2>Create a Savings Goal</h2>
+
+    <form id="goalForm" class="card">
+      <label for="goalName">Goal name</label>
+      <input id="goalName" type="text"
+             placeholder="e.g. New laptop" required>
+
+      <label for="target">Target amount (₹)</label>
+      <input id="target" type="number"
+             min="0.01" step="0.01" required>
+
+      <label for="current">Already saved (₹)</label>
+      <input id="current" type="number"
+             min="0" step="0.01" value="0" required>
+
+      <label for="date">Target date</label>
+      <input id="date" type="date" required>
+
+      <button type="submit">Create Goal</button>
+    </form>
+
+    <h2>Your Savings Goals</h2>
+    <section id="goals" class="cards">
+      <p>No goals created yet.</p>
+    </section>
+  </main>
+
+  <script>
+    const form = document.getElementById("goalForm");
+    const goals = document.getElementById("goals");
+
+    form.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("goalName").value.trim();
+      const target = Number(document.getElementById("target").value);
+      const current = Number(document.getElementById("current").value);
+      const date = document.getElementById("date").value;
+
+      if (!name || !Number.isFinite(target) || target <= 0 ||
+          !Number.isFinite(current) || current < 0 ||
+          current > target || !date) {
+        alert("Enter valid goal details. Savings cannot exceed the target.");
+        return;
+      }
+
+      const card = document.createElement("article");
+      card.className = "card";
+
+      const title = document.createElement("h3");
+      title.textContent = name;
+
+      const amounts = document.createElement("p");
+      amounts.textContent = "₹" + current.toFixed(2) +
+        " saved of ₹" + target.toFixed(2);
+
+      const progress = document.createElement("progress");
+      progress.max = 100;
+      progress.value = (current / target) * 100;
+
+      const deadline = document.createElement("p");
+      deadline.textContent = "Target date: " + date;
+
+      card.append(title, amounts, progress, deadline);
+      goals.appendChild(card);
+
+      form.reset();
+      document.getElementById("current").value = "0";
+    });
+  </script>
+</body>
+</html>
